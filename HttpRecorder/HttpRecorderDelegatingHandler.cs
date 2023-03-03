@@ -120,7 +120,7 @@ namespace HttpRecorder
                     var interactionMessage = _matcher.Match(request, _interaction);
                     if (interactionMessage == null)
                     {
-                        throw new HttpRecorderException($"Unable to find a matching interaction for request {request.Method} {request.RequestUri}.");
+                        throw new InteractionMessageNotFoundException(request);
                     }
 
                     return await PostProcessResponse(interactionMessage.Response);
