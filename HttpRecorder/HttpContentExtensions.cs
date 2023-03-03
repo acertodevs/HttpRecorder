@@ -8,8 +8,7 @@ namespace HttpRecorder
     /// </summary>
     public static class HttpContentExtensions
     {
-        private static readonly Regex BinaryMimeRegex = new Regex("(image/*|audio/*|video/*|application/*|multipart/form-data)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-        private static readonly Regex TextApplicationMimeRegex = new Regex("application/(javascript|json|typescript|xhtml\\+xml|xml)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        private static readonly Regex TextMimeRegex = new Regex("text/*|application/(javascript|json|typescript|xhtml\\+xml|xml)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         private static readonly Regex FormDataMimeRegex = new Regex("application/x-www-form-urlencoded", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         /// <summary>
@@ -25,8 +24,7 @@ namespace HttpRecorder
                 return false;
             }
 
-            return BinaryMimeRegex.IsMatch(contentType)
-                && !TextApplicationMimeRegex.IsMatch(contentType);
+            return !TextMimeRegex.IsMatch(contentType);
         }
 
         /// <summary>
